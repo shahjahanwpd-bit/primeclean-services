@@ -17,6 +17,10 @@
  * 1. Add the variable to :root (light value) and .dark (dark value)
  * 2. Register it in @theme inline as --color-<name>: var(--<name>)
  */
+aside#lovable-badge {
+  display: none !important;
+}
+
 
 @theme inline {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
@@ -167,7 +171,3 @@
 
 ::selection { background: color-mix(in oklab, var(--color-secondary) 55%, transparent); }
 html { scroll-behavior: smooth; }
-
-aside#lovable-badge {
-  display: none;
-}
