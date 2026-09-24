@@ -7,7 +7,7 @@ import { services } from "@/lib/site-data";
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
   return <Link to="/" aria-label="PrimeClean Services home" className={`inline-flex items-center ${inverse ? "rounded-lg bg-card px-3 py-2" : ""}`}>
-    <img src={logo.url} alt="PrimeClean Services" width={419} height={227} className={inverse ? "h-12 w-auto" : "h-15 w-auto"} />
+    <img src={logo.url} alt="PrimeClean Services" width={419} height={227} className={inverse ? "h-12 w-auto" : "h-16 w-auto mix-blend-multiply"} />
   </Link>;
 }
 
