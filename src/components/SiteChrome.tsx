@@ -1,13 +1,13 @@
-import logo from "@/assets/primeclean-logo.png.asset.json";
+import logo from "@/assets/primeclean-logo-crop.png.asset.json";
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { ChevronDown, Facebook, Instagram, MapPin, Menu, Phone, ShoppingBag, UserRound, X } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { ChevronDown, Facebook, Instagram, MapPin, Menu, Phone, ShoppingBag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/site-data";
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
-  return <Link to="/" aria-label="PrimeClean Services home" className={`flex items-center ${inverse ? "rounded-lg bg-card px-3 py-1.5" : ""}`}>
-    <img src={logo.url} alt="PrimeClean Services" width={428} height={256} className="h-14 w-auto" />
+  return <Link to="/" aria-label="PrimeClean Services home" className={`inline-flex items-center ${inverse ? "rounded-lg bg-card px-3 py-2" : ""}`}>
+    <img src={logo.url} alt="PrimeClean Services" width={419} height={227} className={inverse ? "h-12 w-auto" : "h-16 w-auto mix-blend-multiply"} />
   </Link>;
 }
 
@@ -20,7 +20,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return <>
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 shadow-sm backdrop-blur-xl">
-      <div className="page-shell flex h-19 items-center justify-between gap-5">
+      <div className="page-shell flex h-20 items-center justify-between gap-5">
         <Brand />
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Main navigation">
           {mainLinks.slice(0, 2).map((item) => <NavLink key={item.to} {...item} />)}
@@ -31,12 +31,7 @@ export function Header() {
           </div>
           {mainLinks.slice(2).map((item) => <NavLink key={item.to} {...item} />)}
         </nav>
-        <div className="hidden items-center gap-2 xl:flex">
-          <a href="tel:+14312946727" className="mr-2 flex items-center gap-2 text-sm font-bold"><Phone className="size-4 text-primary" />+1 (431) 294 6727</a>
-          <Button asChild variant="ghost" size="icon"><Link to="/account" aria-label="My account"><UserRound /></Link></Button>
-          <Button asChild variant="ghost" size="icon"><Link to="/booking" aria-label="Booking tray" className="relative"><ShoppingBag /><span className="absolute right-0 top-0 grid size-4 place-items-center rounded-full bg-primary text-[9px] text-primary-foreground">0</span></Link></Button>
-          <Button asChild><Link to="/booking">Book Now</Link></Button>
-        </div>
+        <Button asChild className="hidden lg:inline-flex"><Link to="/booking">Book Now</Link></Button>
         <Button className="lg:hidden" variant="ghost" size="icon" onClick={() => setOpen(!open)} aria-label="Toggle menu">{open ? <X /> : <Menu />}</Button>
       </div>
       {open && <div className="border-t bg-background p-5 lg:hidden"><nav className="grid gap-1">
@@ -66,4 +61,10 @@ export function Footer() {
 
 function FooterGroup({ title, links }: { title: string; links: readonly string[] }) { return <div><h3 className="font-display font-bold">{title}</h3><ul className="mt-5 grid gap-2 text-sm text-primary-foreground/65">{links.map((link) => <li key={link}>{link}</li>)}</ul></div>; }
 
-export function MobileBar() { return <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t bg-background p-2 shadow-2xl md:hidden"><Button asChild variant="outline"><a href="tel:+14312946727"><Phone />Call Now</a></Button><Button asChild><Link to="/booking"><ShoppingBag />Book Now</Link></Button></div>; }
+export function WhatsAppButton() {
+  return <a href="https://wa.me/14312946727?text=Hi%20PrimeClean%2C%20I%27d%20like%20to%20book%20a%20cleaning." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" className="fixed bottom-20 right-4 z-50 grid size-14 place-items-center rounded-full bg-whatsapp text-primary-foreground shadow-2xl transition hover:scale-105 md:bottom-6 md:right-6">
+    <svg viewBox="0 0 24 24" className="size-7 fill-current" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.23-9.43 9.44-9.43a9.4 9.4 0 0 1 9.43 9.44c0 5.2-4.24 9.43-9.44 9.43M20.08 3.9A11.3 11.3 0 0 0 12.05.58C5.8.58.7 5.68.7 11.94c0 2 .52 3.95 1.52 5.67L.6 23.5l6.03-1.58a11.3 11.3 0 0 0 5.42 1.38h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.03-1.18-5.88-3.33-8.03"/></svg>
+  </a>;
+}
+
+export function MobileBar() { const path = useRouterState({ select: (s) => s.location.pathname }); if (path.startsWith("/services/")) return null; return <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t bg-background p-2 shadow-2xl md:hidden"><Button asChild variant="outline"><a href="tel:+14312946727"><Phone />Call Now</a></Button><Button asChild><Link to="/booking"><ShoppingBag />Book Now</Link></Button></div>; }

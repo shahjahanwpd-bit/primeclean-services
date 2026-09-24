@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { Footer, Header, MobileBar } from "@/components/SiteChrome";
+import { Footer, Header, MobileBar, WhatsAppButton } from "@/components/SiteChrome";
 
 function NotFoundComponent() {
   return (
@@ -126,6 +126,7 @@ function RootComponent() {
       <main><Outlet /></main>
       <Footer />
       <MobileBar />
+      <WhatsAppButton />
     </QueryClientProvider>
   );
 }

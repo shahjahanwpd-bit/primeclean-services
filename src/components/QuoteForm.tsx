@@ -3,7 +3,7 @@ import { CheckCircle2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/site-data";
 
-export function QuoteForm({ compact = false }: { compact?: boolean }) {
+export function QuoteForm({ compact = false, service, submitLabel = "Send Message / Request Quote" }: { compact?: boolean; service?: string; submitLabel?: string }) {
   const [sent, setSent] = useState(false);
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,7 +28,8 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
         <Field label="Phone" name="phone" type="tel" />
       </div>
       <label className="grid gap-2 text-sm font-semibold">Service Type*
-        <select required name="service" className="h-12 rounded-lg border border-input bg-background px-4 font-normal outline-none transition focus:border-primary focus:ring-3 focus:ring-ring/20">
+        {service && <input type="hidden" name="service" value={service} />}
+        <select required={!service} disabled={!!service} defaultValue={service ?? ""} name={service ? undefined : "service"} className="h-12 rounded-lg border border-input bg-background px-4 font-normal outline-none transition focus:border-primary focus:ring-3 focus:ring-ring/20 disabled:opacity-100 disabled:bg-accent">
           <option value="">Choose a service</option>
           {services.map((service) => <option key={service.slug}>{service.name}</option>)}
         </select>
@@ -36,7 +37,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
       <label className="grid gap-2 text-sm font-semibold">Message / Job Details*
         <textarea required name="message" rows={compact ? 3 : 5} placeholder="Tell us what needs cleaning..." className="rounded-lg border border-input bg-background px-4 py-3 font-normal outline-none transition focus:border-primary focus:ring-3 focus:ring-ring/20" />
       </label>
-      <Button size="lg" type="submit" className="h-12 w-full sm:w-fit">Send Message / Request Quote <Send /></Button>
+      <Button size="lg" type="submit" className="h-12 w-full sm:w-fit">{submitLabel} <Send /></Button>
     </form>
   );
 }
