@@ -167,3 +167,7 @@
 
 ::selection { background: color-mix(in oklab, var(--color-secondary) 55%, transparent); }
 html { scroll-behavior: smooth; }
+
+aside#lovable-badge {
+  display: none;
+}
