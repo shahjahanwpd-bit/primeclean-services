@@ -1,3 +1,4 @@
+import logo from "@/assets/primeclean-logo.png.asset.json";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Facebook, Instagram, MapPin, Menu, Phone, ShoppingBag, UserRound, X } from "lucide-react";
@@ -5,9 +6,8 @@ import { Button } from "@/components/ui/button";
 import { services } from "@/lib/site-data";
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
-  return <Link to="/" className={`flex items-center gap-2 ${inverse ? "text-primary-foreground" : "text-foreground"}`} aria-label="PrimeClean Services home">
-    <span className="grid size-10 place-items-center rounded-lg bg-primary text-lg font-black text-primary-foreground">P</span>
-    <span className="leading-none"><strong className="block font-display text-lg">PRIME<span className={inverse ? "text-brand-bright" : "text-primary"}>CLEAN</span></strong><small className="text-[10px] font-bold tracking-[0.18em] opacity-70">SERVICES</small></span>
+  return <Link to="/" aria-label="PrimeClean Services home" className={`flex items-center ${inverse ? "rounded-lg bg-card px-3 py-1.5" : ""}`}>
+    <img src={logo.url} alt="PrimeClean Services" width={428} height={256} className="h-14 w-auto" />
   </Link>;
 }
 
